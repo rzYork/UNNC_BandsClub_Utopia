@@ -1,0 +1,42 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: unnc-bandsclub-utopia-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/utopia?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: utopia
+    driver-class-name: com.mysql.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 4096MB
+      max-request-size: 4096MB
+      enabled: true
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    accessKeyId: LTAI5tRKWTJ6m4GN5tiYkisj
+    accessKeySecret: yNOJlDd2oyWnQxRR4R39MLEFC4r4Iv
+    bucketName: unncbandsclub
+    maxSize: 4096
+    dir:
+      prefix:
+
+utopia:
+  open-register: true
+  open-token-verify: false # Close Token verify for dev debug processing
+  open-cdkey: true
+  nicknames:
+    - Test Nickname 1
+    - Test Nickname 2
+    - Test Nickname 3
+    - Test Nickname 4
+    - Test Nickname 5
+    - Test Nickname 6

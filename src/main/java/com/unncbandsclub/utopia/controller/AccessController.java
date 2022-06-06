@@ -38,16 +38,19 @@ import java.util.stream.Collectors;
 public class AccessController {
 
     @Resource
-    UserService userService;
+    private UserService userService;
     @Resource
-    AccessService accessService;
+    private AccessService accessService;
 
     @Resource
-    RoleService roleService;
+    private RoleService roleService;
 
     @PostMapping("/get/username")
     @UserLoginToken
     public Result getAccessListByUserName(@RequestBody UserVo vo) {
+        if(vo==null||vo.getUsername()==null||vo.getUsername().isEmpty()){
+          return Result.error(ErrorCase.NULL_OR_EMPTY_NECESSARY_PARAMETER);
+        }
         List<Access> enabledAccess = new ArrayList<>();
         User u = userService.findUserByName(vo.getUsername());
         if (u == null)

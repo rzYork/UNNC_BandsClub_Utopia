@@ -3,7 +3,7 @@ package com.unncbandsclub.utopia.vo;
 import lombok.Data;
 
 @Data
-public class LoginVo {
+public class UserLoginVo {
     private String username;
     private String password;
 

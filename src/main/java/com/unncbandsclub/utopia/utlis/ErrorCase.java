@@ -33,6 +33,10 @@ public enum ErrorCase {
     ,ILLEGAL_STUDENT_ID(1321,"非法学生ID")
     ,TOO_WEAK_PASSWORD(1322,"密码强度不足")
     ,UPLOAD_FILE_FAIL(1323,"上传文件失败")
+    ,INVALID_BAND_NAME(1324,"无效乐队名称")
+    ,BAND_NAME_EXIST(1325,"乐队名已存在")
+    ,INVALID_VO_OBJECT(5001,"无效VO对象")
+    ,NULL_OR_EMPTY_NECESSARY_PARAMETER(5002,"无效或空的必须参数")
 
 
     ;

@@ -1,4 +1,4 @@
-package com.unncbandsclub.utopia;
+package com.unncbandsclub.utopia.config;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;

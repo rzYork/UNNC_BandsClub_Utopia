@@ -21,6 +21,8 @@ public interface UserService extends IService<User> {
 
     RegisterResult register(String username, String password,String key);
 
+    RegisterResult register(String username,String password);
+
     LoginResult login(String username, String password);
 
     User findUserByName(String username);

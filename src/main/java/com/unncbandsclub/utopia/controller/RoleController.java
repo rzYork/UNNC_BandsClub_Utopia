@@ -30,6 +30,9 @@ public class RoleController {
     @UserLoginToken
     @PostMapping("/get/username")
     public Result findUserRoleByUserId(@RequestBody UserVo vo) {
+        if(vo==null||vo.getUsername()==null||vo.getUsername().isEmpty()){
+          return Result.error(ErrorCase.NULL_OR_EMPTY_NECESSARY_PARAMETER);
+        }
         User u = userService.findUserByName(vo.getUsername());
         if (u == null) {
             return Result.error(ErrorCase.USER_NOT_EXIST);

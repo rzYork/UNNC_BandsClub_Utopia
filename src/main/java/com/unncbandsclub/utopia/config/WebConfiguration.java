@@ -1,5 +1,6 @@
-package com.unncbandsclub.utopia.utlis;
+package com.unncbandsclub.utopia.config;
 
+import com.unncbandsclub.utopia.utlis.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ConcurrentTaskExecutor;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;

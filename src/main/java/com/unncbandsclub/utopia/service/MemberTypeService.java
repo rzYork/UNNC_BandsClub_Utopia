@@ -3,6 +3,8 @@ package com.unncbandsclub.utopia.service;
 import com.unncbandsclub.utopia.entity.MemberType;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MemberTypeService extends IService<MemberType> {
 
+    List<MemberType> findAll();
 }
