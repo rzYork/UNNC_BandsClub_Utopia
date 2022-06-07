@@ -14,6 +14,7 @@ public enum ErrorCase {
     ILLEGAL_PARAMETER(1306, "非法参数"),
 
     SYSTEM_MAINTAIN(5000, "系统维护"),
+    SYSTEM_ERROR(5001,"系统错误"),
     INVALID_KEY(1307, "无效激活密匙"),
 
     MODIFY_USER_FAIL(1308,"修改用户状态失败"),
@@ -35,8 +36,11 @@ public enum ErrorCase {
     ,UPLOAD_FILE_FAIL(1323,"上传文件失败")
     ,INVALID_BAND_NAME(1324,"无效乐队名称")
     ,BAND_NAME_EXIST(1325,"乐队名已存在")
-    ,INVALID_VO_OBJECT(5001,"无效VO对象")
-    ,NULL_OR_EMPTY_NECESSARY_PARAMETER(5002,"无效或空的必须参数")
+  ,ID_NOT_EXISTS(1326,"ID不存在")
+  ,INVALID_VO_OBJECT(5001,"无效VO对象")
+  ,NULL_OR_EMPTY_NECESSARY_PARAMETER(5002,"无效或空的必须参数")
+  ,ILLEGAL_FILE_CONTENT_TYPE(5003,"错误的文件类型")
+  ,TOO_LARGE_FILE(1327,"文件过大")
 
 
     ;

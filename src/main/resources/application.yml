@@ -33,10 +33,5 @@ utopia:
   open-register: true
   open-token-verify: false # Close Token verify for dev debug processing
   open-cdkey: true
-  nicknames:
-    - Test Nickname 1
-    - Test Nickname 2
-    - Test Nickname 3
-    - Test Nickname 4
-    - Test Nickname 5
-    - Test Nickname 6
+  nicknames: 'Test Nickname 1 , Test Nickname 2'
+  default_avatars: 1,2

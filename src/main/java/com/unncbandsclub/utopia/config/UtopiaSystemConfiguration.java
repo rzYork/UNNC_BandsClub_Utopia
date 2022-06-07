@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Configuration
 @Component
@@ -21,7 +23,10 @@ public class UtopiaSystemConfiguration {
   private Boolean isOpenCdkey;
 
   @Value("${utopia.nicknames}")
-  private List<String> nickNames;
+  private String nickNames;
+
+  @Value("${utopia.default_avatars}")
+  private String defaultAvatarIds;
 
   public Boolean getRegisterOpen() {
     return isRegisterOpen;
@@ -35,7 +40,11 @@ public class UtopiaSystemConfiguration {
     return isOpenCdkey;
   }
 
-  public List<String> getNickNames() {
-    return new ArrayList<>(nickNames);
+  public String[] getNickNames() {
+    return nickNames.split(",");
+  }
+
+  public List<Integer> getDefaultAvatarIds() {
+    return Arrays.stream(defaultAvatarIds.split(",")).map(Integer::parseInt).collect(Collectors.toList());
   }
 }

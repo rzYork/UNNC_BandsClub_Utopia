@@ -30,8 +30,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Resource
     UserRoleMapper userRoleMapper;
 
-
-
     @Override
     public List<Role> findRoleByUserId(Integer uid) {
         if(uid==null)

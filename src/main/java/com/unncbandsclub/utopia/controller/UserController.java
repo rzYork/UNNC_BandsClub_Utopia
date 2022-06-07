@@ -52,9 +52,6 @@ public class UserController {
     }
     LoginResult login = userService.login(vo.getUsername(), vo.getPassword());
 
-    if (login.getUser().getStatus() == false) {
-      return Result.error(ErrorCase.DISABLED_ACCOUNT);
-    }
 
     if (!login.isSuccess()) {
       LoginResult.LoginFailReason loginFailReason = login.getLoginFailReason();
@@ -68,6 +65,10 @@ public class UserController {
         case ACCOUNT_INVALID:
           return Result.error(ErrorCase.INVALID_ACCOUNT);
       }
+    }
+
+    if (login.getUser().getStatus() == false) {
+      return Result.error(ErrorCase.DISABLED_ACCOUNT);
     }
 
     //login success

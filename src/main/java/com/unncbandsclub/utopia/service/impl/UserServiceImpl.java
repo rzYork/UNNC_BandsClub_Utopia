@@ -45,7 +45,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
   @PostConstruct
   private void initConfig() {
-    nickNames.addAll(config.getNickNames());
+    nickNames.addAll(Arrays.asList(config.getNickNames()));
   }
 
 

@@ -73,4 +73,20 @@ public class RegularUtil {
     }
 
 
+  /**
+   * 获取文件后缀
+   * @param ordinaryFileName
+   * @return
+   */
+  public static String extractFileSuffix(String ordinaryFileName){
+      String[] s1 = ordinaryFileName.split("/");
+      ordinaryFileName=s1[s1.length-1];
+      String[] s2 = ordinaryFileName.split("\\.");
+      if(s2.length<=1){
+        return "";
+      }
+      return s2[s2.length-1];
+    }
+
+
 }
