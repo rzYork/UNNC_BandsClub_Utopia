@@ -48,8 +48,8 @@ public class User implements Serializable {
     @ApiModelProperty(value = "QQ联系方式")
     private String addressQq;
 
-    @ApiModelProperty(value = "头像URL")
-    private String avatar;
+    @ApiModelProperty(value = "头像ID")
+    private Integer avatar;
 
     @ApiModelProperty(value = "最后一次更新时间")
     private Date updatedTime;

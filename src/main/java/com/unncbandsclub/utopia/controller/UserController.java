@@ -4,9 +4,12 @@ package com.unncbandsclub.utopia.controller;
 import com.unncbandsclub.utopia.annotation.PassToken;
 import com.unncbandsclub.utopia.annotation.UserLoginToken;
 import com.unncbandsclub.utopia.config.UtopiaSystemConfiguration;
+import com.unncbandsclub.utopia.entity.Access;
 import com.unncbandsclub.utopia.entity.Role;
 import com.unncbandsclub.utopia.entity.User;
 import com.unncbandsclub.utopia.pojo.RegisterResult;
+import com.unncbandsclub.utopia.service.AccessService;
+import com.unncbandsclub.utopia.utlis.TokenThreadUtils;
 import com.unncbandsclub.utopia.vo.*;
 import com.unncbandsclub.utopia.utlis.ErrorCase;
 import com.unncbandsclub.utopia.pojo.LoginResult;
@@ -39,6 +42,9 @@ public class UserController {
 
   @Resource
   RoleService roleService;
+
+  @Resource
+  AccessService accessService;
 
   @Resource
   UtopiaSystemConfiguration config;
@@ -79,11 +85,15 @@ public class UserController {
       roleService.findRoleByUserId(user.getId());
     List<Integer> roleIdList = roleByUserId.stream().map(Role::getId).collect(Collectors.toList());
 
+    List<Access> accessByRole=accessService.findAccessByRole(roleByUserId);
+    List<Integer> accessIdList=accessByRole.stream().map(Access::getId).collect(Collectors.toList());
+
     TokenVo tokenVo = new TokenVo();
     tokenVo.setPassword(user.getPassword());
     tokenVo.setUsername(user.getName());
     tokenVo.setLoginTime(new Date().getTime());
     tokenVo.setRoleList(roleIdList);
+    tokenVo.setRoleList(accessIdList);
     data.put("token", TokenUtil.createToken(tokenVo));
 
     return Result.ok(data);
@@ -120,16 +130,22 @@ public class UserController {
 
   }
 
-  @PostMapping("/info")
+  @GetMapping("/info")
   @UserLoginToken(accessInNeed = {3020})
-  public Result getIndividualInformation(@RequestBody UserVo vo) {
-    if (vo == null || vo.getUsername() == null || vo.getUsername().isEmpty()) {
-      return Result.error(ErrorCase.NULL_OR_EMPTY_NECESSARY_PARAMETER);
-    }
+  public Result getIndividualInformation() {
+    TokenVo vo= TokenThreadUtils.get();
+    if(vo==null)
+      return Result.error(ErrorCase.INVALID_TOKEN);
     User userByName = userService.findUserByName(vo.getUsername());
-    if (userByName == null)
-      return Result.error(ErrorCase.USER_NOT_EXIST);
     return Result.ok(userByName);
+  }
+
+  @PatchMapping("/update-info")
+  @UserLoginToken()
+  public Result updateInfo(@RequestBody User user){
+
+
+    return Result.error(ErrorCase.SYSTEM_MAINTAIN);
   }
 
 }

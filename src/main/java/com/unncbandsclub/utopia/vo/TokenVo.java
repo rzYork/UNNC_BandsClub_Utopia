@@ -11,4 +11,5 @@ public class TokenVo {
     private long loginTime;
     private String password;
     private List<Integer> roleList;
+    private List<Integer> accessList;
 }

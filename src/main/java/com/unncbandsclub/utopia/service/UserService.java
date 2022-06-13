@@ -1,5 +1,6 @@
 package com.unncbandsclub.utopia.service;
 
+import com.unncbandsclub.utopia.entity.Avatar;
 import com.unncbandsclub.utopia.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.unncbandsclub.utopia.pojo.LoginResult;
@@ -30,6 +31,11 @@ public interface UserService extends IService<User> {
     List<User> findAll();
 
     boolean updateUser(User u);
+
+    boolean updateAvatar(User u,Integer avatarId);
+    boolean updateAvatar(User u, Avatar avatar);
+    boolean updateAvatar(Integer uid,Integer avatarId);
+    boolean updateAvatar(Integer uid,Avatar avatar);
 
 
 

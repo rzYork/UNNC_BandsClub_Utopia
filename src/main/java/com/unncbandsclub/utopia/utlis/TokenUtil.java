@@ -117,7 +117,7 @@ public class TokenUtil {
         return parseToken(claims);
     }
 
-    public static LoginResult verifyToken(TokenVo vo) {
+    public static LoginResult verifyTokenLogin(TokenVo vo) {
         return tokenUtil.userService.login(vo.getUsername(), vo.getPassword());
     }
 

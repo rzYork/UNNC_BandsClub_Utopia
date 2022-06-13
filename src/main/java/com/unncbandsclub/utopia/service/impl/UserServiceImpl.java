@@ -2,7 +2,9 @@ package com.unncbandsclub.utopia.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.unncbandsclub.utopia.config.UtopiaSystemConfiguration;
+import com.unncbandsclub.utopia.entity.Avatar;
 import com.unncbandsclub.utopia.entity.User;
+import com.unncbandsclub.utopia.mapper.AvatarMapper;
 import com.unncbandsclub.utopia.mapper.UserMapper;
 import com.unncbandsclub.utopia.pojo.LoginResult;
 import com.unncbandsclub.utopia.pojo.RegisterResult;
@@ -36,6 +38,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
   @Resource
   UserMapper userMapper;
 
+  @Resource
+  AvatarMapper avatarMapper;
+
 
   public static final List<String> nickNames = new ArrayList<>();
 
@@ -47,7 +52,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
   private void initConfig() {
     nickNames.addAll(Arrays.asList(config.getNickNames()));
   }
-
 
 
   @Override
@@ -81,13 +85,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     user.setPassword(password);
     user.setAddressEmail("");
     user.setAddressWechat("");
-    user.setAvatar("/default_avatar.png");
+    List<Integer> dAId = config.getDefaultAvatarIds();
+    user.setAvatar(dAId.get((int) (Math.random() * dAId.size())));
     user.setCreatedTime(new Date());
     user.setUpdatedTime(new Date());
     user.setIsAdmin(false);
     user.setStatus(true);
     user.setNickname(nickNames.get((int) (Math.random() * list().size())));
-
     userMapper.insert(user);
     return RegisterResult.success(user);
   }
@@ -133,5 +137,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
   public boolean updateUser(User u) {
     if (u == null || u.getId() == null) return false;
     return userMapper.updateById(u) == 1;
+  }
+
+  @Override
+  public boolean updateAvatar(User u, Integer avatarId) {
+    if (u == null || avatarId == null) return false;
+    if (u.getId() == null) return false;
+    if (userMapper.selectById(u.getId()) == null) return false;
+    u.setAvatar(avatarId);
+    return userMapper.updateById(u) == 1;
+  }
+
+  @Override
+  public boolean updateAvatar(User u, Avatar avatar) {
+    if (u == null || avatar == null || u.getId() == null || avatar.getId() == null) return false;
+    u.setAvatar(avatar.getId());
+    return userMapper.updateById(u) == 1;
+  }
+
+  @Override
+  public boolean updateAvatar(Integer uid, Integer avatarId) {
+    if (uid == null || avatarId == null)
+      return false;
+    User user = userMapper.selectById(uid);
+    if (user == null) return false;
+    user.setAvatar(avatarId);
+    return userMapper.updateById(user) == 1;
+  }
+
+  @Override
+  public boolean updateAvatar(Integer uid, Avatar avatar) {
+    if (uid == null || avatar == null || avatar.getId() == null) return false;
+    User user = userMapper.selectById(uid);
+    if (user == null) return false;
+    user.setAvatar(avatar.getId());
+    return userMapper.updateById(user) == 1;
   }
 }

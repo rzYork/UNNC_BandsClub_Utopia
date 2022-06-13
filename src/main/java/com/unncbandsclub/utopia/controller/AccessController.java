@@ -46,7 +46,7 @@ public class AccessController {
     private RoleService roleService;
 
     @PostMapping("/get/username")
-    @UserLoginToken
+    @UserLoginToken()
     public Result getAccessListByUserName(@RequestBody UserVo vo) {
         if(vo==null||vo.getUsername()==null||vo.getUsername().isEmpty()){
           return Result.error(ErrorCase.NULL_OR_EMPTY_NECESSARY_PARAMETER);
