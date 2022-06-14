@@ -2,6 +2,7 @@ package com.unncbandsclub.utopia.controller;
 
 
 import com.unncbandsclub.utopia.annotation.UserLoginToken;
+import com.unncbandsclub.utopia.entity.Band;
 import com.unncbandsclub.utopia.service.BandService;
 import com.unncbandsclub.utopia.utlis.ErrorCase;
 import com.unncbandsclub.utopia.utlis.Result;
@@ -41,11 +42,14 @@ public class BandController {
     if (bandService.findByName(vo.getBandName()) != null) {
       return Result.error(ErrorCase.BAND_NAME_EXIST);
     }
+    Band band = new Band();
+    band.setBandName(vo.getBandName());
+    band.setIntroduction(vo.getIntroduction());
+    band.setIs_in_school(true);
 
-    
-
-
-    return Result.ok();
+    Band result = bandService.registerBand(band);
+    if (result == null) return Result.error(ErrorCase.SYSTEM_ERROR);
+    return Result.ok(result);
   }
 }
 

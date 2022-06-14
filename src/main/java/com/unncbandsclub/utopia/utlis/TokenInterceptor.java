@@ -38,6 +38,8 @@ public class TokenInterceptor implements HandlerInterceptor {
   @Resource
   UtopiaSystemConfiguration config;
 
+  public static final String HEADER_NAME = "Authorization";
+
 
   /**
    * @param request
@@ -91,7 +93,7 @@ public class TokenInterceptor implements HandlerInterceptor {
     //设定响应体
 
 
-    String token = request.getHeader("Authorization");
+    String token = request.getHeader(HEADER_NAME);
     if (token == null) return false;
     log.info("Intercepted Token: {}", token);
     Claims claim = TokenUtil.parseToken(token);
@@ -122,13 +124,15 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     //判定用户是否拥有所有所需权限
     List<Access> accessList = accessService.findAccessByRole(roleService.findRoleByUserId(user.getId()));
-    accessList.forEach(a->{log.info(a.getName()+", "+a.getId());});
+    accessList.forEach(a -> {
+      log.info(a.getName() + ", " + a.getId());
+    });
     List<Integer> accessIds = accessList.stream().map(Access::getId).collect(Collectors.toList());
-    log.info(accessIds.toString());
+    log.debug(accessIds.toString());
     for (int i = 0; i < annotation.accessInNeed().length; i++) {
-      log.info("need: "+annotation.accessInNeed()[i]);
+      log.debug("need: " + annotation.accessInNeed()[i]);
     }
-    List<Integer> accessIdInNeed=new ArrayList<>();
+    List<Integer> accessIdInNeed = new ArrayList<>();
     for (int i : annotation.accessInNeed()) {
       accessIdInNeed.add(i);
     }

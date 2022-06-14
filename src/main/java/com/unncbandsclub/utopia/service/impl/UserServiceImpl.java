@@ -11,6 +11,7 @@ import com.unncbandsclub.utopia.pojo.RegisterResult;
 import com.unncbandsclub.utopia.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.unncbandsclub.utopia.utlis.RegularUtil;
+import com.unncbandsclub.utopia.vo.InfoUpdateVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.http11.filters.BufferedInputFilter;
 import org.springframework.stereotype.Service;
@@ -172,5 +173,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     if (user == null) return false;
     user.setAvatar(avatar.getId());
     return userMapper.updateById(user) == 1;
+  }
+
+  @Override
+  public User updateUser(User u, InfoUpdateVo v) {
+    if (v.getWechat() != null) u.setAddressWechat(v.getWechat());
+    if (v.getSex() != null) u.setSex(Integer.parseInt(v.getSex()));
+    if (v.getRealName() != null) u.setRealName(v.getRealName());
+    if (v.getStudentId() != null) u.setStudentId(Integer.parseInt(v.getStudentId()));
+    if (v.getNickName() != null) u.setNickname(v.getNickName());
+    if (v.getQq() != null) u.setAddressQq(v.getQq());
+    if (v.getEmail() != null) u.setAddressEmail(v.getEmail());
+    if (userMapper.updateById(u)==1)
+      return u;
+    else return null;
   }
 }

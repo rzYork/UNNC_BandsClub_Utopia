@@ -9,12 +9,9 @@ import com.unncbandsclub.utopia.entity.Role;
 import com.unncbandsclub.utopia.entity.User;
 import com.unncbandsclub.utopia.pojo.RegisterResult;
 import com.unncbandsclub.utopia.service.AccessService;
-import com.unncbandsclub.utopia.utlis.TokenThreadUtils;
+import com.unncbandsclub.utopia.utlis.*;
 import com.unncbandsclub.utopia.vo.*;
-import com.unncbandsclub.utopia.utlis.ErrorCase;
 import com.unncbandsclub.utopia.pojo.LoginResult;
-import com.unncbandsclub.utopia.utlis.TokenUtil;
-import com.unncbandsclub.utopia.utlis.Result;
 import com.unncbandsclub.utopia.service.RoleService;
 import com.unncbandsclub.utopia.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -85,8 +82,8 @@ public class UserController {
       roleService.findRoleByUserId(user.getId());
     List<Integer> roleIdList = roleByUserId.stream().map(Role::getId).collect(Collectors.toList());
 
-    List<Access> accessByRole=accessService.findAccessByRole(roleByUserId);
-    List<Integer> accessIdList=accessByRole.stream().map(Access::getId).collect(Collectors.toList());
+    List<Access> accessByRole = accessService.findAccessByRole(roleByUserId);
+    List<Integer> accessIdList = accessByRole.stream().map(Access::getId).collect(Collectors.toList());
 
     TokenVo tokenVo = new TokenVo();
     tokenVo.setPassword(user.getPassword());
@@ -133,19 +130,24 @@ public class UserController {
   @GetMapping("/info")
   @UserLoginToken(accessInNeed = {3020})
   public Result getIndividualInformation() {
-    TokenVo vo= TokenThreadUtils.get();
-    if(vo==null)
+    TokenVo vo = TokenThreadUtils.get();
+    if (vo == null)
       return Result.error(ErrorCase.INVALID_TOKEN);
     User userByName = userService.findUserByName(vo.getUsername());
     return Result.ok(userByName);
   }
 
   @PatchMapping("/update-info")
-  @UserLoginToken()
-  public Result updateInfo(@RequestBody User user){
-
-
-    return Result.error(ErrorCase.SYSTEM_MAINTAIN);
+  @UserLoginToken(accessInNeed = {3008})
+  public Result updateInfo(@RequestBody InfoUpdateVo vo) {
+    User loginUser
+      = TokenThreadUtils.getUser(userService);
+    if (!RegularUtil.checkInfoUpdateVo(vo)) {
+      return Result.error(ErrorCase.ILLEGAL_PARAMETER);
+    }
+    User user = userService.updateUser(loginUser, vo);
+    if (user == null) return Result.error(ErrorCase.SYSTEM_ERROR);
+    return Result.ok(user);
   }
 
 }

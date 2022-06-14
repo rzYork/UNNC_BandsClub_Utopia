@@ -23,65 +23,43 @@ public enum ErrorCase {
   DISABLED_ACCOUNT(1311, "账户已注销未激活！"),
   INVALID_TOKEN(5002, "无效Token验证！"),
 
-  ILLEGAL_NICKNAME(1312,"昵称过长")
+  ILLEGAL_NICKNAME(1312, "昵称过长"),
 
-    ,
+  ILLEGAL_PASSWORD(1313, "非法密码"),
 
-  ILLEGAL_PASSWORD(1313,"非法密码")
-    ,
+  ILLEGAL_USERNAME(1314, "非法账户名"),
 
-  ILLEGAL_USERNAME(1314,"非法账户名")
-    ,
+  ILLEGAL_MAIL(1315, "非法邮箱"),
 
-  ILLEGAL_MAIL(1315,"非法邮箱")
-    ,
+  ILLEGAL_WECHAT(1316, "非法微信"),
 
-  ILLEGAL_WECHAT(1316,"非法微信")
-     ,
+  ILLEGAL_QQ(1317, "非法QQ"),
 
-  ILLEGAL_QQ(1317,"非法QQ")
-    ,
+  ILLEGAL_AVATAR_URL(1318, "非法头像URL"),
 
-  ILLEGAL_AVATAR_URL(1318,"非法头像URL")
-    ,
+  ILLEGAL_SEX_OPTION(1319, "非法性别选项"),
 
-  ILLEGAL_SEX_OPTION(1319,"非法性别选项")
-    ,
+  ILLEGAL_REAL_NAME(1320, "非法实名"),
 
-  ILLEGAL_REAL_NAME(1320,"非法实名")
-    ,
+  ILLEGAL_STUDENT_ID(1321, "非法学生ID"),
 
-  ILLEGAL_STUDENT_ID(1321,"非法学生ID")
-    ,
+  TOO_WEAK_PASSWORD(1322, "密码强度不足"),
 
-  TOO_WEAK_PASSWORD(1322,"密码强度不足")
-    ,
+  UPLOAD_FILE_FAIL(1323, "上传文件失败"),
 
-  UPLOAD_FILE_FAIL(1323,"上传文件失败")
-    ,
+  INVALID_BAND_NAME(1324, "无效乐队名称"),
 
-  INVALID_BAND_NAME(1324,"无效乐队名称")
-    ,
+  BAND_NAME_EXIST(1325, "乐队名已存在"),
 
-  BAND_NAME_EXIST(1325,"乐队名已存在")
-  ,
+  ID_NOT_EXISTS(1326, "ID不存在"),
 
-  ID_NOT_EXISTS(1326,"ID不存在")
-  ,
+  INVALID_VO_OBJECT(5001, "无效VO对象"),
 
-  INVALID_VO_OBJECT(5001,"无效VO对象")
-  ,
+  NULL_OR_EMPTY_NECESSARY_PARAMETER(5002, "无效或空的必须参数"),
 
-  NULL_OR_EMPTY_NECESSARY_PARAMETER(5002,"无效或空的必须参数")
-  ,
+  ILLEGAL_FILE_CONTENT_TYPE(5003, "错误的文件类型"),
 
-  ILLEGAL_FILE_CONTENT_TYPE(5003,"错误的文件类型")
-  ,
-
-  TOO_LARGE_FILE(1327,"文件过大")
-
-
-    ;
+  TOO_LARGE_FILE(1327, "文件过大");
 
   private String reason;
   private int errorCode;

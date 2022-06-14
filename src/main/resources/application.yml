@@ -32,7 +32,7 @@ aliyun:
 
 utopia:
   open-register: true
-  open-token-verify: true # Close Token verify for dev debug processing
+  open-token-verify: false # Close Token verify for dev debug processing
   open-cdkey: true
   nicknames: 'Test Nickname 1 , Test Nickname 2'
   default_avatars: 1,2

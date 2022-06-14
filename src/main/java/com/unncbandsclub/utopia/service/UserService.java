@@ -5,6 +5,7 @@ import com.unncbandsclub.utopia.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.unncbandsclub.utopia.pojo.LoginResult;
 import com.unncbandsclub.utopia.pojo.RegisterResult;
+import com.unncbandsclub.utopia.vo.InfoUpdateVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +37,8 @@ public interface UserService extends IService<User> {
     boolean updateAvatar(User u, Avatar avatar);
     boolean updateAvatar(Integer uid,Integer avatarId);
     boolean updateAvatar(Integer uid,Avatar avatar);
+
+    User updateUser(User u, InfoUpdateVo updateInfo);
 
 
 
