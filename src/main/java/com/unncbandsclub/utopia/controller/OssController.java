@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@Api(tags = "上传")
+@Api(tags = "文件上传")
 @RequestMapping("/ossController")
 @Slf4j
 public class OssController {

@@ -12,6 +12,7 @@ import com.unncbandsclub.utopia.utlis.Result;
 import com.unncbandsclub.utopia.utlis.UDataMapBuilder;
 import com.unncbandsclub.utopia.vo.UserInfoVo;
 import com.unncbandsclub.utopia.vo.UserRoleVo;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@Api(tags="管理员接口")
 @RequestMapping("/manage")
 public class ManageController {
 

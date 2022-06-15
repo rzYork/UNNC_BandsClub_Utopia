@@ -14,6 +14,7 @@ import com.unncbandsclub.utopia.vo.*;
 import com.unncbandsclub.utopia.pojo.LoginResult;
 import com.unncbandsclub.utopia.service.RoleService;
 import com.unncbandsclub.utopia.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,7 +32,7 @@ import java.util.stream.Collectors;
  * @since 2022-05-17
  */
 @RestController
-@CrossOrigin
+@Api(tags ="用户")
 @RequestMapping("/user")
 public class UserController {
   @Resource
@@ -141,7 +142,7 @@ public class UserController {
   @UserLoginToken(accessInNeed = {3008})
   public Result updateInfo(@RequestBody InfoUpdateVo vo) {
     User loginUser
-      = TokenThreadUtils.getUser(userService);
+      = TokenThreadUtils.getUser();
     if (!RegularUtil.checkInfoUpdateVo(vo)) {
       return Result.error(ErrorCase.ILLEGAL_PARAMETER);
     }

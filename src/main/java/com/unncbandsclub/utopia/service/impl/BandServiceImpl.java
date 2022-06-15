@@ -72,6 +72,6 @@ public class BandServiceImpl extends ServiceImpl<BandMapper, Band> implements Ba
     int insert = bandMapper.insert(band);
     if (insert == -1)
       return null;
-    return band;
+    return findByName(band.getBandName());
   }
 }

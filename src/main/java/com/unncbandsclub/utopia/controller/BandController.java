@@ -7,11 +7,8 @@ import com.unncbandsclub.utopia.service.BandService;
 import com.unncbandsclub.utopia.utlis.ErrorCase;
 import com.unncbandsclub.utopia.utlis.Result;
 import com.unncbandsclub.utopia.vo.BandRegisterVo;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -24,6 +21,7 @@ import javax.annotation.Resource;
  * @since 2022-05-22
  */
 @RestController
+@Api(tags="乐队管理")
 @RequestMapping("/band")
 public class BandController {
 
@@ -50,6 +48,12 @@ public class BandController {
     Band result = bandService.registerBand(band);
     if (result == null) return Result.error(ErrorCase.SYSTEM_ERROR);
     return Result.ok(result);
+  }
+
+  @GetMapping("/findAll")
+  @UserLoginToken(accessInNeed = {3011})
+  public Result findALl(){
+    return Result.ok(bandService.findAll());
   }
 }
 

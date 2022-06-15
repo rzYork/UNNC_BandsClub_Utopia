@@ -52,6 +52,13 @@ public class TokenInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     //如果未开启Token校验则直接放行
     if (!config.getTokenVerifyOpen()) {
+      log.info("[===========================================================]");
+      log.info("[===========================================================]");
+      log.info("[===========================================================]");
+      log.info("[=================未开启Token校验！！已放行=====================]");
+      log.info("[===========================================================]");
+      log.info("[===========================================================]");
+      log.info("[===========================================================]");
       return true;
     }
     // 如果不是映射到方法直接通过

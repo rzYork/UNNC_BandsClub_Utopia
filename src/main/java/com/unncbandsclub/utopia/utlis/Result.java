@@ -8,7 +8,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
 
  @Data
 @ApiModel(value = "全局统一返回结果")
@@ -46,6 +48,15 @@ public class Result {
         ok.data=m;
         return ok;
     }
+    public static Result ok(List list){
+      Result ok=ok();
+      HashMap<String,Object> m=new HashMap<>();
+      for (int i = 0; i < list.size(); i++) {
+        m.put(String.valueOf(i),list.get(i));
+      }
+      ok.data=m;
+      return ok;
+    }
 
     public static Result ok(HashMap<String,Object> data)
      {
@@ -59,6 +70,17 @@ public class Result {
          ok.message=msg;
          return ok;
      }
+
+     public static Result ok(Object[] os){
+      Result ok=ok();
+      HashMap<String,Object> m=new HashMap<>();
+       for (int i = 0; i < os.length; i++) {
+         m.put(String.valueOf(i),os[i]);
+       }
+       ok.data=m;
+       return ok;
+     }
+
 
 
     public static Result error(){
